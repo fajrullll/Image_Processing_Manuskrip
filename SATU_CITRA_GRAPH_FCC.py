@@ -4669,9 +4669,49 @@ if FCC_AKTIF:
 # --- 2. PENYIMPANAN DAN EVALUASI METRIK ---
 output_folder = OUTPUT_FOLDER
 
+# Ukuran keluaran disamakan dengan figure B-Spline: 852 x 740 piksel.
+UKURAN_POTONGAN_BSPLINE = (852, 740)  # (lebar, tinggi)
+MARGIN_POTONGAN = 60
+
 for idx, region_mask in enumerate(sorted_hasil_potongan):
-    output_image = (region_mask * 255).astype(np.uint8)
     output_filename = os.path.join(output_folder, f'potongan_huruf_{idx + 1}.png')
+    coords_huruf = np.argwhere(region_mask)
+
+    if len(coords_huruf) == 0:
+        output_image = np.zeros(
+            (UKURAN_POTONGAN_BSPLINE[1], UKURAN_POTONGAN_BSPLINE[0]),
+            dtype=np.uint8
+        )
+    else:
+        min_y, min_x = coords_huruf.min(axis=0)
+        max_y, max_x = coords_huruf.max(axis=0)
+        crop_huruf = (region_mask[min_y:max_y + 1, min_x:max_x + 1] * 255).astype(np.uint8)
+
+        area_w = UKURAN_POTONGAN_BSPLINE[0] - (2 * MARGIN_POTONGAN)
+        area_h = UKURAN_POTONGAN_BSPLINE[1] - (2 * MARGIN_POTONGAN)
+        faktor_skala = min(
+            area_w / max(crop_huruf.shape[1], 1),
+            area_h / max(crop_huruf.shape[0], 1)
+        )
+        lebar_baru = max(1, int(round(crop_huruf.shape[1] * faktor_skala)))
+        tinggi_baru = max(1, int(round(crop_huruf.shape[0] * faktor_skala)))
+        huruf_resize = cv.resize(
+            crop_huruf,
+            (lebar_baru, tinggi_baru),
+            interpolation=cv.INTER_NEAREST
+        )
+
+        output_image = np.zeros(
+            (UKURAN_POTONGAN_BSPLINE[1], UKURAN_POTONGAN_BSPLINE[0]),
+            dtype=np.uint8
+        )
+        posisi_x = (UKURAN_POTONGAN_BSPLINE[0] - lebar_baru) // 2
+        posisi_y = (UKURAN_POTONGAN_BSPLINE[1] - tinggi_baru) // 2
+        output_image[
+            posisi_y:posisi_y + tinggi_baru,
+            posisi_x:posisi_x + lebar_baru
+        ] = huruf_resize
+
     cv.imwrite(output_filename, output_image)
 
 # ==========================================================
