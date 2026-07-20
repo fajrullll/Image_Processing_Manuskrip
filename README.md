@@ -12,6 +12,10 @@ Berikut merupakan citra tulisan Jawi yang digunakan sebagai masukan dan akan dip
 
 ![Citra asli tulisan Jawi](CITRA/dengan%20syafaat%20rasul.png)
 
+Citra yang digunakan bersumber dari dataset BRIN berikut:
+
+[Dataset Citra Manuskrip pada Repositori Data BRIN](https://data.brin.go.id/dataset.xhtml?persistentId=hdl:20.500.12690/RIN/1JFQSA)
+
 ## Metode
 
 Metode yang digunakan dalam proyek ini terdiri atas:
