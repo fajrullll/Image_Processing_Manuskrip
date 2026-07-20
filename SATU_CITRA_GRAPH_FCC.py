@@ -4020,6 +4020,11 @@ image_path = r"E:\progres\GRAPH_FCC_SATUCITRA\CITRA\dengan syafaat rasul.png"
 OUTPUT_FOLDER = r"E:\progres\GRAPH_FCC_SATUCITRA\HASIL"
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
+FOLDER_HASIL_POTONGAN = os.path.join(OUTPUT_FOLDER, "Hasil Potongan Huruf")
+FOLDER_HASIL_BSPLINE = os.path.join(OUTPUT_FOLDER, "Hasil Bspiline")
+os.makedirs(FOLDER_HASIL_POTONGAN, exist_ok=True)
+os.makedirs(FOLDER_HASIL_BSPLINE, exist_ok=True)
+
 image = io.imread(image_path)
 if image.shape[2] == 4:
     image = image[:, :, :3]
@@ -4674,7 +4679,10 @@ UKURAN_POTONGAN_BSPLINE = (852, 740)  # (lebar, tinggi)
 MARGIN_POTONGAN = 60
 
 for idx, region_mask in enumerate(sorted_hasil_potongan):
-    output_filename = os.path.join(output_folder, f'potongan_huruf_{idx + 1}.png')
+    output_filename = os.path.join(
+        FOLDER_HASIL_POTONGAN,
+        f'potongan_huruf_{idx + 1}.png'
+    )
     coords_huruf = np.argwhere(region_mask)
 
     if len(coords_huruf) == 0:
@@ -4940,7 +4948,7 @@ for idx, region_mask in enumerate(sorted_hasil_potongan):
         
         plt.tight_layout()
         fig.savefig(
-            os.path.join(OUTPUT_FOLDER, f"visualisasi_bspline_huruf_{idx + 1}.png"),
+            os.path.join(FOLDER_HASIL_BSPLINE, f"visualisasi_bspline_huruf_{idx + 1}.png"),
             dpi=200,
             bbox_inches="tight"
         )
