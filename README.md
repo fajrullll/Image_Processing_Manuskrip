@@ -95,29 +95,7 @@ Setiap karakter hasil segmentasi dibentuk kembali menjadi kurva B-Spline menggun
 
 ## Alur Pemrosesan
 
-```text
-Citra tulisan Jawi
-        ↓
-Grayscale dan binarisasi
-        ↓
-Penghapusan noise dan estimasi skala goresan
-        ↓
-Identifikasi rasm dan diakritik
-        ↓
-Skeletonisasi
-        ↓
-Ekstraksi endpoint, intersection, turn, dan loop
-        ↓
-Segmentasi berbasis topologi graf dan FCC
-        ↓
-Potongan karakter individual
-        ↓
-Penelusuran skeleton menggunakan TSP
-        ↓
-Pembentukan kurva B-Spline
-        ↓
-Evaluasi dan visualisasi hasil
-```
+![Diagram alur pemrosesan](CITRA/alur_pemrosesan.png)
 
 ## Evaluasi
 
