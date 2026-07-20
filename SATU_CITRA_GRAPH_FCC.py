@@ -4026,6 +4026,8 @@ if image.shape[2] == 4:
 gray = 1 - color.rgb2gray(image)
 gray_uint8 = (gray * 255).astype(np.uint8)
 _, binary = cv.threshold(gray_uint8, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
+# Simpan hasil threshold awal untuk visualisasi sebelum noise dihapus.
+binary_otsu = binary.copy()
 
 r_stroke = hitung_lebar_garis_stroke(binary)
 scale = r_stroke / 8.0 
@@ -4254,6 +4256,86 @@ for idx, region_mask in enumerate(sorted_hasil_potongan):
     # PENAMPUNG DATA UNTUK TABEL EVALUASI AKHIR
     eval_tsp = []
     eval_bspline = []
+
+# --- 0. VISUALISASI HASIL PRE-PROCESSING ---
+# Tiga tahap disimpan terpisah agar perubahan citra mudah dibandingkan.
+print("\nMenyimpan 3 visualisasi hasil pre-processing...")
+preprocessing_outputs = [
+    (
+        gray,
+        "gray",
+        0,
+        1,
+        "Pre-processing 1: Grayscale Terinversi",
+        "visualisasi_preprocessing_1_grayscale.png"
+    ),
+    (
+        binary_otsu,
+        "gray",
+        0,
+        255,
+        "Pre-processing 2: Threshold Otsu",
+        "visualisasi_preprocessing_2_binary_otsu.png"
+    ),
+    (
+        cleaned_binary,
+        "gray",
+        0,
+        1,
+        "Pre-processing 3: Biner Bersih",
+        "visualisasi_preprocessing_3_cleaned_binary.png"
+    )
+]
+
+for data_preprocessing, cmap_preprocessing, vmin_preprocessing, vmax_preprocessing, judul_preprocessing, nama_file_preprocessing in preprocessing_outputs:
+    fig_preprocessing, ax_preprocessing = plt.subplots(
+        figsize=(1024 / 120, 215 / 120),
+        dpi=120
+    )
+    fig_preprocessing.patch.set_facecolor("white")
+    ax_preprocessing.imshow(
+        data_preprocessing,
+        cmap=cmap_preprocessing,
+        vmin=vmin_preprocessing,
+        vmax=vmax_preprocessing
+    )
+    ax_preprocessing.set_aspect("equal", adjustable="box")
+    ax_preprocessing.set_xlim(0, data_preprocessing.shape[1])
+    ax_preprocessing.set_ylim(data_preprocessing.shape[0], 0)
+    ax_preprocessing.set_title(judul_preprocessing, fontsize=11, fontweight="bold")
+    ax_preprocessing.axis("off")
+    fig_preprocessing.tight_layout(pad=0.4)
+    fig_preprocessing.savefig(
+        os.path.join(OUTPUT_FOLDER, nama_file_preprocessing),
+        dpi=200,
+        bbox_inches="tight",
+        facecolor=fig_preprocessing.get_facecolor()
+    )
+    plt.close(fig_preprocessing)
+
+# --- 0. VISUALISASI HASIL SKELETON ---
+# Menyimpan skeleton murni tanpa key point, bounding box, atau garis potong.
+print("\nMenyimpan visualisasi hasil skeleton...")
+fig_skeleton, ax_skeleton = plt.subplots(
+    figsize=(1024 / 120, 215 / 120),
+    dpi=120
+)
+fig_skeleton.patch.set_facecolor("white")
+ax_skeleton.set_facecolor("black")
+ax_skeleton.imshow(skeleton_used, cmap="gray", vmin=0, vmax=1)
+ax_skeleton.set_aspect("equal", adjustable="box")
+ax_skeleton.set_xlim(0, skeleton_used.shape[1])
+ax_skeleton.set_ylim(skeleton_used.shape[0], 0)
+ax_skeleton.set_title("Hasil Skeletonisasi", fontsize=11, fontweight="bold")
+ax_skeleton.axis("off")
+fig_skeleton.tight_layout(pad=0.4)
+fig_skeleton.savefig(
+    os.path.join(OUTPUT_FOLDER, "visualisasi_hasil_skeleton.png"),
+    dpi=200,
+    bbox_inches="tight",
+    facecolor=fig_skeleton.get_facecolor()
+)
+plt.close(fig_skeleton)
 
 # --- 1. VISUALISASI UTAMA ---
 fig, ax = plt.subplots(
