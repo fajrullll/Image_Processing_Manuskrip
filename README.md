@@ -1,4 +1,4 @@
-﻿# Segmentasi Citra Tulisan Jawi dengan Graph, FCC, TSP, dan B-Spline
+# Segmentasi Citra Tulisan Jawi dengan Graph, FCC, TSP, dan B-Spline
 
 Proyek ini mengimplementasikan pipeline **pengolahan citra tulisan Jawi/Arab** untuk melakukan segmentasi rasm (badan huruf), mendeteksi fitur topologi, menelusuri skeleton, dan membentuk kurva karakter.
 
@@ -76,26 +76,6 @@ Evaluasi dan penyimpanan visualisasi
 
 - Python 3.9 atau lebih baru
 - `pip`
-
-## Instalasi
-
-```bash
-git clone https://github.com/fajrullll/Image_Processing_PerangJohor.git
-cd Image_Processing_PerangJohor
-python -m venv .venv
-```
-
-Aktifkan virtual environment pada Windows:
-
-```powershell
-.venv\Scripts\activate
-```
-
-Instal dependensi:
-
-```bash
-pip install numpy matplotlib opencv-python scikit-image scipy networkx
-```
 
 ## Konfigurasi
 
