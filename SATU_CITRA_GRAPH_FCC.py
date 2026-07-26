@@ -832,7 +832,7 @@ def visualisasi_freeman(debug_records, label_step=4, target_xrange_visual=None):
             if tampilkan_cut:
                 ax.axvline(
                     x=cut_col,
-                    color="red",
+                    color="white",
                     linestyle="--",
                     linewidth=2,
                     label="Freeman Cut",
