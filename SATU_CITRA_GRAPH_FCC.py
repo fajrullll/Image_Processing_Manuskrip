@@ -4487,7 +4487,7 @@ if FCC_AKTIF and "TARGET_FREEMAN_XRANGE" in globals():
     ax.axvspan(
         TARGET_FREEMAN_XRANGE[0],
         TARGET_FREEMAN_XRANGE[1],
-        color="cyan",
+        color="white",
         alpha=0.15,
         label="FCC X-Range",
         zorder=2
@@ -4515,9 +4515,9 @@ for idx, region_mask in enumerate(sorted_hasil_potongan):
     skel_part = skeletonize(badan_huruf)
     py, px = np.where(skel_part)
 
-    rect = patches.Rectangle((min_x_seg, min_y_seg), w_seg, h_seg, linewidth=2, edgecolor='red', facecolor='none')
+    rect = patches.Rectangle((min_x_seg, min_y_seg), w_seg, h_seg, linewidth=1, edgecolor='#FFFF00', facecolor='none')
     ax.add_patch(rect)
-    ax.text(min_x_seg, min_y_seg-10, f"H{idx+1}", color='red', fontsize=12, fontweight='bold')
+    ax.text(min_x_seg, min_y_seg-10, f"C{idx+1}", color='#FFFF00', fontsize=12, fontweight='bold')
 
 handles, labels = ax.get_legend_handles_labels()
 by_label = dict(zip(labels, handles))
