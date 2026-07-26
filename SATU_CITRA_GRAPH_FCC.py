@@ -4397,7 +4397,7 @@ for idx_huruf, region_mask in enumerate(sorted_hasil_potongan):
             zorder=15
         )
         ax.plot(
-            end_x, end_y, 'o', color='yellow', markersize=6,
+            end_x, end_y, 'o', color='orange', markersize=6,
             label='End Endpoint' if idx_huruf == 0 else "",
             zorder=15
         )
@@ -4612,7 +4612,7 @@ for label, props in component_features.items():
             zorder=15
         )
         ax_keypoint.plot(
-            end_x, end_y, "o", color="yellow", markersize=6,
+            end_x, end_y, "o", color="orange", markersize=6,
             label="End Endpoint" if label == 1 else "",
             zorder=15
         )
