@@ -529,17 +529,6 @@ def visualisasi_freeman(debug_records, label_step=4, target_xrange_visual=None):
 
     print("\nSaving Freeman Chain Code visualization after stroke-direction normalization...")
 
-    teks_keterangan = (
-        "Freeman Chain Code (FCC) Direction Guide\n"
-        "move right       : 0\n"
-        "move up-right    : 1\n"
-        "move up          : 2\n"
-        "move up-left     : 3\n"
-        "move left        : 4\n"
-        "move down-left   : 5\n"
-        "move down        : 6\n"
-        "move down-right  : 7\n\n"
-    )
 
     def pecah_index_kontinu(indices):
         """
@@ -643,7 +632,10 @@ def visualisasi_freeman(debug_records, label_step=4, target_xrange_visual=None):
         # ======================================================
         # FIGURE
         # ======================================================
-        fig, ax = plt.subplots(figsize=(12, 6))
+        fig, ax = plt.subplots(
+            figsize=(1024 / 120, 215 / 120),
+            dpi=120
+        )
         fig.patch.set_facecolor("white")
         ax.set_facecolor("black")
 
@@ -664,7 +656,7 @@ def visualisasi_freeman(debug_records, label_step=4, target_xrange_visual=None):
             ax.axvspan(
                 tx_min,
                 tx_max,
-                color="cyan",
+                color="white",
                 alpha=0.10,
                 zorder=1,
                 label="_nolegend_"
@@ -839,46 +831,25 @@ def visualisasi_freeman(debug_records, label_step=4, target_xrange_visual=None):
                     zorder=4
                 )
 
-        # ======================================================
-        # TEXTBOX KETERANGAN
-        # ======================================================
-        ax.text(
-            0.02,
-            0.98,
-            teks_keterangan,
-            transform=ax.transAxes,
-            fontsize=8.5,
-            verticalalignment="top",
-            color="black",
-            bbox=dict(
-                boxstyle="round",
-                facecolor="white",
-                edgecolor="black",
-                alpha=0.95
-            ),
-            zorder=20
-        )
 
-        ax.set_title(
-            f"Freeman Chain Code After Stroke-Direction Normalization - Region {rec.get('region_label', idx + 1)}",
-            fontsize=12
-        )
 
         ax.legend(
-            loc="upper right",
+            loc="upper left",
+            bbox_to_anchor=(1.01, 1.0),
             fontsize=8,
-            framealpha=0.9
+            framealpha=0.9,
+            borderaxespad=0.0
         )
 
         ax.axis("off")
 
-        plt.tight_layout()
+        fig.subplots_adjust(left=0.014, right=0.835, top=0.92, bottom=0.04)
         nomor_region = rec.get("region_label", idx + 1)
         output_path = os.path.join(
             OUTPUT_FOLDER,
             f"visualisasi_freeman_region_{nomor_region}.png"
         )
-        fig.savefig(output_path, dpi=200, bbox_inches="tight")
+        fig.savefig(output_path, dpi=120, facecolor=fig.get_facecolor())
         plt.close(fig)
 
         # ======================================================
