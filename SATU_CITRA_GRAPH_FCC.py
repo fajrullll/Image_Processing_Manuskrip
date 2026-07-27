@@ -679,7 +679,7 @@ def visualisasi_freeman(debug_records, label_step=4, target_xrange_visual=None):
                 path_seg[:, 0],
                 color="cyan",
                 linewidth=2.0,
-                label="Freeman Stroke-Direction Path" if not sudah_label_path else "_nolegend_",
+                label="_nolegend_",
                 zorder=3
             )
 
