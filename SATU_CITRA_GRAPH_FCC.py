@@ -5007,29 +5007,25 @@ print("-" * 60)
 for data in eval_tsp:
     print(f"H-{data[0]:<8} | {data[1]:<18} | {data[2]:.2f}")
 
-print("\n" + "="*120)
+print("\n" + "=" * 32)
 print("HASIL CURVE FITTING KARAKTER B-SPLINE")
-print("="*120)
-print(
-    f"{'H':<5} | {'Skeleton':<9} | {'CP':<5} | "
-    f"{'Kompresi':<10} | {'TSP Dist':<10} | "
-    f"{'Curve Len':<10} | {'RMSE':<8} | {'MAE':<8} | "
-    f"{'Max Error':<10} | {'Smoothness':<10}"
-)
-print("-" * 120)
+print("=" * 32)
+print(f"{'H':<7} | {'RMSE':<8} | {'MAE':<8}")
+print("-" * 34)
 
 for row in eval_bspline:
     print(
-        f"H{row['huruf']:<4} | "
-        f"{row['skeleton']:<9} | "
-        f"{row['cp']:<5} | "
-        f"{row['kompresi']:<9.2f}% | "
-        f"{row['tsp_dist']:<10.2f} | "
-        f"{row['curve_len']:<10.2f} | "
+        f"H{row['huruf']:<6} | "
         f"{row['rmse']:<8.2f} | "
-        f"{row['mae']:<8.2f} | "
-        f"{row['max_error']:<10.2f} | "
-        f"{row['smoothness']:<10.4f}"
+        f"{row['mae']:<8.2f}"
     )
 
-print("="*120 + "\n")
+if eval_bspline:
+    print("-" * 34)
+    print(
+        f"{'AVERAGE':<7} | "
+        f"{np.mean([row['rmse'] for row in eval_bspline]):<8.2f} | "
+        f"{np.mean([row['mae'] for row in eval_bspline]):<8.2f}"
+    )
+
+print("=" * 34 + "\n")
