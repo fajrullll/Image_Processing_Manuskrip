@@ -74,7 +74,7 @@ Visualisasi berikut menampilkan jalur penelusuran skeleton dan total jarak TSP p
 
 Setiap karakter hasil segmentasi dibentuk kembali menjadi kurva B-Spline menggunakan control point yang diperoleh dari jalur skeleton.
 
-![Contoh hasil B-Spline](HASIL/visualisasi_bspline_huruf_1.png)
+![Contoh hasil B-Spline](HASIL/Hasil%20Bspiline/visualisasi_bspline_huruf_1.png)
 
 ## Fitur
 
