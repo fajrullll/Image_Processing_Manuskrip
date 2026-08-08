@@ -111,7 +111,7 @@ Evaluasi TSP mencakup jumlah piksel skeleton asli dan total jarak jalur yang ter
 
 ### Evaluasi Kurva B-Spline
 
-Kualitas pembentukan kurva dievaluasi berdasarkan jumlah control point, persentase kompresi data, panjang kurva, Root Mean Square Error (RMSE), Mean Absolute Error (MAE), maximum error, dan smoothness.
+Kualitas pembentukan kurva dievaluasi berdasarkan jumlah control point, persentase kompresi data, panjang kurva, Root Mean Square Error (RMSE), Mean Absolute Error (MAE), Reconstruction Error (jarak maksimum antara titik skeleton asli dan kurva B-Spline terdekat), dan smoothness.
 
 ## Catatan
 
