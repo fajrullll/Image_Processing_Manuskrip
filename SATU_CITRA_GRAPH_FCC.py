@@ -4908,7 +4908,7 @@ for idx, region_mask in enumerate(sorted_hasil_potongan):
         ax.set_aspect('equal', adjustable='datalim') 
         
         title = f'(Generated Character {idx+1})\n'
-        title += f'Total CP: {total_cp_karakter} | TSP Distance: {total_jarak_karakter:.2f} px\n'
+        title += f'Control Points: {total_cp_karakter} | TSP Distance: {total_jarak_karakter:.2f} px\n'
         title += f'Data Compression: {kompresi:.1f}% | RMSE: {rmse:.2f} px'
         ax.set_title(title, fontsize=11, pad=15)
         
