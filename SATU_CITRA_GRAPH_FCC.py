@@ -5010,22 +5010,25 @@ for data in eval_tsp:
 print("\n" + "=" * 32)
 print("HASIL CURVE FITTING KARAKTER B-SPLINE")
 print("=" * 32)
-print(f"{'H':<7} | {'RMSE':<8} | {'MAE':<8}")
-print("-" * 34)
+# Added reconstruction error column
+print(f"{'H':<7} | {'RMSE':<8} | {'MAE':<8} | {'RECON_ERR':<10}")
+print("-" * 44)
 
 for row in eval_bspline:
     print(
         f"H{row['huruf']:<6} | "
         f"{row['rmse']:<8.2f} | "
-        f"{row['mae']:<8.2f}"
+        f"{row['mae']:<8.2f} | "
+        f"{row['max_error']:<10.2f}"
     )
 
 if eval_bspline:
-    print("-" * 34)
+    print("-" * 44)
     print(
         f"{'AVERAGE':<7} | "
         f"{np.mean([row['rmse'] for row in eval_bspline]):<8.2f} | "
-        f"{np.mean([row['mae'] for row in eval_bspline]):<8.2f}"
+        f"{np.mean([row['mae'] for row in eval_bspline]):<8.2f} | "
+        f"{np.mean([row['max_error'] for row in eval_bspline]):<10.2f}"
     )
 
-print("=" * 34 + "\n")
+print("=" * 44 + "\n")
